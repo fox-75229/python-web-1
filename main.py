@@ -4,7 +4,8 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return '<h1 style="color:red">你好! Flask</h1>'
+    return '<body style=""></body>' \
+    '<h1 style="color:red">你好! Flask</h1>'
     
 @app.route("/name")
 def name():
