@@ -1,6 +1,16 @@
-def main():
-    print("Hello from python-web-1!")
+from flask import Flask
 
+app = Flask(__name__)
 
-if __name__ == "__main__":
-    main()
+@app.route('/')
+def index():
+    return '<h1 style="color:red">你好! Flask</h1>'
+    
+@app.route("/name")
+def name():
+    return '<h1>holle!Robert</h1>'
+
+if __name__=="__main__":
+    app.run(debug=True)
+    
+
