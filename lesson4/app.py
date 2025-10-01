@@ -1,10 +1,10 @@
-from flask import Flask
+from flask import Flask, render_template
 
-app = Flask(__name__)
+app = Flask(__name__,static_folder="static",template_folder="templates")
 
 @app.route("/")
 def index():
-    return "<h1>Hello, 你好嗎!</h1>"
+    return render_template("index.html")
 
 def main():
     """啟動應用（教學用：啟用 debug 模式）"""
