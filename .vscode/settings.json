@@ -1,3 +1,4 @@
 {
-    "github.copilot.nextEditSuggestions.enabled": true
+    "github.copilot.nextEditSuggestions.enabled": true,
+    "copilot.chat.instructions": "這是一個 Flask 的專案學習範例，每一個資料夾內都會有一個 Flask 的專案。使用的是 uv 的虛擬環境，請在終端機輸入 `.venv\\Scripts\\activate` 來啟動虛擬環境。"
 }

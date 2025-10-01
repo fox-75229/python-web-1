@@ -1,0 +1,162 @@
+/* ...基本 RWD 樣式 (mobile-first) ... */
+
+:root {
+    --max-width: 1100px;
+    --accent: #2b6cb0;
+    --muted: #666;
+    --bg: #f7fafc;
+}
+
+* {
+    box-sizing: border-box
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans", "Helvetica Neue", Arial;
+    background: var(--bg);
+    color: #111;
+}
+
+.container {
+    width: 90%;
+    max-width: var(--max-width);
+    margin: 0 auto
+}
+
+/* header */
+.site-header {
+    background: #fff;
+    border-bottom: 1px solid #e6edf3
+}
+
+.header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 0
+}
+
+.brand {
+    font-weight: 700;
+    color: var(--accent)
+}
+
+/* nav */
+.site-nav {
+    position: relative
+}
+
+.nav-toggle {
+    background: transparent;
+    border: 1px solid #ddd;
+    padding: 0.4rem 0.6rem;
+    border-radius: 6px;
+    display: inline-block
+}
+
+.nav-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: none
+}
+
+.nav-list.open {
+    display: block
+}
+
+.nav-list li {
+    margin: 0.5rem 0
+}
+
+.nav-list a {
+    text-decoration: none;
+    color: var(--muted)
+}
+
+/* hero */
+.hero {
+    padding: 2rem 0;
+    text-align: center
+}
+
+.hero h1 {
+    margin: 0 0 0.5rem;
+    font-size: 1.5rem
+}
+
+.hero p {
+    margin: 0 0 1rem;
+    color: var(--muted)
+}
+
+.btn {
+    display: inline-block;
+    background: var(--accent);
+    color: #fff;
+    padding: 0.6rem 1rem;
+    border-radius: 6px;
+    text-decoration: none
+}
+
+/* cards (single column on mobile) */
+.cards {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    padding: 1rem 0
+}
+
+.card {
+    background: #fff;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06)
+}
+
+/* footer */
+.site-footer {
+    padding: 1rem 0;
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.9rem
+}
+
+/* Larger screens */
+@media (min-width: 768px) {
+    .nav-toggle {
+        display: none
+    }
+
+    .nav-list {
+        display: flex;
+        gap: 1rem
+    }
+
+    .nav-list li {
+        margin: 0
+    }
+
+    .hero {
+        padding: 3rem 0;
+        text-align: left
+    }
+
+    .hero h1 {
+        font-size: 2rem
+    }
+
+    .cards {
+        grid-template-columns: repeat(3, 1fr)
+    }
+}
+
+/* Very large */
+@media (min-width: 1200px) {
+    .hero h1 {
+        font-size: 2.4rem
+    }
+}

@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Lesson4 AI - 範例首頁</title>
+    <meta name="description" content="職能發展學院：Flask 範例首頁，示範 RWD 基本元素" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}" />
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="container header-inner">
+            <div class="brand">職能發展學院</div>
+            <nav class="site-nav" aria-label="主要導覽">
+                <button class="nav-toggle" aria-expanded="false" aria-controls="nav-list">選單</button>
+                <ul id="nav-list" class="nav-list">
+                    <li><a href="#">首頁</a></li>
+                    <li><a href="#">課程</a></li>
+                    <li><a href="#">範例</a></li>
+                    <li><a href="#">聯絡</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container main-content" role="main">
+        <section class="hero">
+            <h1>Flask 範例專案（RWD）</h1>
+            <p>這是一個簡單的範例頁面，示範如何在 Flask 中建立可響應的 HTML 結構與樣式。</p>
+            <a class="btn" href="#" role="button">開始學習</a>
+        </section>
+
+        <section class="cards">
+            <article class="card">
+                <h2>課程目標</h2>
+                <p>了解 Flask 專案結構、建立路由、以及靜態檔案管理。</p>
+            </article>
+            <article class="card">
+                <h2>實作範例</h2>
+                <p>BMI 計算、YouBike API、資料處理與視覺化。</p>
+            </article>
+            <article class="card">
+                <h2>教學資源</h2>
+                <p>提供 Jupyter 筆記本、說明文件與練習題。</p>
+            </article>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>© 2025 職能發展學院 — Flask 範例專案</p>
+        </div>
+    </footer>
+
+    <script>
+        // 簡單的導覽切換行為（無外部套件）
+        (function () {
+            const btn = document.querySelector('.nav-toggle');
+            const nav = document.getElementById('nav-list');
+            if (!btn || !nav) return;
+            btn.addEventListener('click', function () {
+                const expanded = this.getAttribute('aria-expanded') === 'true';
+                this.setAttribute('aria-expanded', String(!expanded));
+                nav.classList.toggle('open');
+            });
+        })();
+    </script>
+</body>
+
+</html>
