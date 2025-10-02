@@ -52,6 +52,12 @@ body {
     padding: 0;
 }
 
+/* 確保桌面預設為水平顯示（維持現有桌機行為） */
+.navbar .nav-list {
+    display: flex;
+    /* ...existing declarations... */
+}
+
 .nav-item a {
     color: white;
     text-decoration: none;
@@ -145,4 +151,114 @@ footer {
         justify-content: flex-end;
         flex-wrap: wrap;
     }
+}
+
+/* nav-toggle 預設顯示（桌機/平板皆可見），但使用深色圖示以在淺色導覽列上可見 */
+.nav-toggle {
+    /* 由原先 display:none 改為顯示，保持排版屬性 */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0.25rem;
+    margin-left: 0.5rem;
+    z-index: 60;
+}
+
+/* 漢堡字型圖示：桌機預設使用深色（可在變數中調整） */
+.nav-toggle .hamburger-icon {
+    display: inline-block;
+    font-size: 1.4rem;
+    line-height: 1;
+    color: var(--brand-text, #0f1720);
+    /* 桌機為深色，避免在淺底看不見 */
+    user-select: none;
+    padding: 0.1rem 0.3rem;
+    border-radius: 6px;
+}
+
+/* 手機專用：在小螢幕時強制為白色圖示（覆寫桌機深色） */
+@media (max-width: 800px) {
+    .nav-toggle .hamburger-icon {
+        color: #ffffff !important;
+        /* 手機版白色 */
+        padding: 0.25rem 0.5rem;
+    }
+}
+
+/* 隱藏舊的 bar 結構（若先前版本仍存在） */
+.nav-toggle .hamburger,
+.nav-toggle .hamburger .bar {
+    display: none;
+}
+
+/* 使用字型圖示（Unicode）作為漢堡按鈕 */
+.nav-toggle .hamburger-icon {
+    display: inline-block;
+    font-size: 1.4rem;
+    line-height: 1;
+    color: #ffffff !important;
+    /* 強制白色 */
+    user-select: none;
+}
+
+/* 在手機顯示切換按鈕並確保顏色為白（以高優先度避免被其他規則覆蓋） */
+@media (max-width: 800px) {
+    .nav-toggle {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .nav-toggle .hamburger-icon {
+        color: #ffffff !important;
+        /* 增加點擊區域 */
+        padding: 0.25rem 0.5rem;
+        border-radius: 6px;
+    }
+
+    /* 開啟狀態確保仍為白色（如果 JS 加上 .open） */
+    .nav-toggle.open .hamburger-icon {
+        color: #ffffff !important;
+    }
+}
+
+/* ...existing code... */
+.navbar .nav-list {
+    display: none !important;
+    width: 100%;
+    position: relative;
+    z-index: 50;
+}
+
+/* 開啟時為垂直排列並佔滿寬度 */
+.navbar .nav-list.open {
+    display: flex !important;
+    flex-direction: column;
+    gap: 0.25rem;
+    padding: 0.5rem 1rem;
+    /* 若想要與導覽列同背景，可取消下行註解 */
+    /* background-color: var(--navbar-bg); */
+    box-shadow: 0 6px 18px rgba(15, 23, 36, 0.06);
+}
+
+/* 手機版每個項目填滿寬度，讓按鈕較容易點擊 */
+.navbar .nav-list .nav-item a {
+    display: block;
+    padding: 0.75rem 0.5rem;
+}
+
+/* 漢堡按鈕開啟時可做簡單動畫（切換成 X） */
+.nav-toggle.open .hamburger .bar:nth-child(1) {
+    transform: translateY(6px) rotate(45deg);
+}
+
+.nav-toggle.open .hamburger .bar:nth-child(2) {
+    opacity: 0;
+}
+
+.nav-toggle.open .hamburger .bar:nth-child(3) {
+    transform: translateY(-6px) rotate(-45deg);
 }

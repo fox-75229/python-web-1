@@ -16,7 +16,13 @@
     <nav class="navbar">
         <div class="container">
             <a class="navbar-brand" href="#">職能發展學院</a>
-            <ul class="nav-list">
+
+            <!-- 手機版導覽切換按鈕（改為字型圖示 ☰） -->
+            <button class="nav-toggle" aria-controls="primary-navigation" aria-expanded="false" aria-label="顯示導覽選單">
+                <span class="hamburger-icon" aria-hidden="true">☰</span>
+            </button>
+
+            <ul id="primary-navigation" class="nav-list">
                 <li class="nav-item">
                     <a href="#" class="active">首頁</a>
                 </li>
@@ -52,6 +58,9 @@
             <p>&copy; 2025 職能發展學院. All rights reserved.</p>
         </div>
     </footer>
+
+    <!-- 載入手機版導覽的行為腳本 -->
+    <script src="{{ url_for('static', filename='js/index.js') }}"></script>
 </body>
 
 </html>
