@@ -1,5 +1,3 @@
-/* lesson5 static CSS extracted from templates/index.html */
-
 /* 重置樣式 */
 * {
     margin: 0;
@@ -13,18 +11,30 @@ body {
     line-height: 1.6;
 }
 
-/* 導覽列樣式 */
+/* 容器 */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+/* 導覽列 */
 .navbar {
     background-color: #0B346E;
-    padding: 1.5rem 2.0rem;
+    padding: 0.5rem 1rem;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .navbar .container {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    /* 品牌左、按鈕右 */
-    gap: 1rem;
+    height: 60px;
+    padding: 0;
+    position: relative;
 }
 
 .navbar-brand {
@@ -34,58 +44,66 @@ body {
     font-weight: bold;
 }
 
-.navbar .navbar-brand {
-    font-weight: 700;
-}
-
+/* 導覽列選單 */
 .nav-list {
-    list-style: none;
     display: flex;
-    gap: 20px;
-}
-
-.navbar .nav-list {
-    display: flex;
-    gap: 0.75rem;
     list-style: none;
     margin: 0;
     padding: 0;
-}
-
-/* 確保桌面預設為水平顯示（維持現有桌機行為） */
-.navbar .nav-list {
-    display: flex;
-    /* ...existing declarations... */
+    gap: 1.5rem;
+    align-items: center;
 }
 
 .nav-item a {
     color: white;
     text-decoration: none;
-}
-
-.navbar .nav-item a {
-    text-decoration: none;
-    padding: 0.5rem 0.75rem;
-    color: #ffffff;
-    /* 按鈕文字改為白色 */
+    padding: 0.5rem 1rem;
     border-radius: 4px;
-    transition: background-color 0.15s ease, color 0.15s ease;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    display: block;
 }
 
-/* active / hover 狀態：使用較深但透明的背景以保留白色文字的可讀性 */
-.navbar .nav-item a.active,
-.navbar .nav-item a:hover {
-    background-color: rgba(0, 0, 0, 0.12);
-    /* 淡暗背景，讓白色文字可見 */
-    color: #ffffff;
-    /* 確保 hover/active 時仍為白色 */
+.nav-item a:hover,
+.nav-item a.active {
+    background-color: rgba(255, 255, 255, 0.1);
 }
 
-.nav-item a:hover {
-    color: #ddd;
+/* 漢堡選單按鈕 */
+.nav-toggle {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    z-index: 60;
 }
 
-/* 主要內容區樣式 */
+.hamburger-icon {
+    width: 24px;
+    height: 24px;
+}
+
+.hamburger-icon .line {
+    fill: #ffffff;
+    transition: transform 0.3s ease;
+}
+
+/* 漢堡選單按鈕動畫 */
+.nav-toggle[aria-expanded="true"] .line.top {
+    transform: translateY(20px) rotate(45deg);
+}
+
+.nav-toggle[aria-expanded="true"] .line.middle {
+    opacity: 0;
+}
+
+.nav-toggle[aria-expanded="true"] .line.bottom {
+    transform: translateY(-20px) rotate(-45deg);
+}
+
+/* 主要內容區 */
 main {
     padding: 2rem 0;
 }
@@ -113,13 +131,12 @@ main {
     margin-bottom: 1rem;
 }
 
-/* lead paragraph style (moved from inline) */
 .lead {
     font-size: 1.2rem;
     margin: 1rem 0;
 }
 
-/* 頁尾樣式 */
+/* 頁尾 */
 footer {
     background-color: #0B346E;
     color: white;
@@ -128,7 +145,7 @@ footer {
     margin-top: 2rem;
 }
 
-/* 響應式設計 */
+/* 響應式設計 - 平板 */
 @media (max-width: 768px) {
     .row {
         flex-direction: column;
@@ -140,125 +157,62 @@ footer {
     }
 }
 
-/* 小螢幕處理：改為直列並讓按鈕靠右或換行 */
-@media (max-width: 600px) {
+/* 響應式設計 - 手機 */
+@media (max-width: 800px) {
+    .navbar {
+        padding: 0.5rem 1rem;
+    }
+
     .navbar .container {
-        flex-direction: column;
-        align-items: stretch;
+        position: relative;
     }
 
-    .navbar .nav-list {
-        justify-content: flex-end;
-        flex-wrap: wrap;
-    }
-}
-
-/* nav-toggle 預設顯示（桌機/平板皆可見），但使用深色圖示以在淺色導覽列上可見 */
-.nav-toggle {
-    /* 由原先 display:none 改為顯示，保持排版屬性 */
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    padding: 0.25rem;
-    margin-left: 0.5rem;
-    z-index: 60;
-}
-
-/* 漢堡字型圖示：桌機預設使用深色（可在變數中調整） */
-.nav-toggle .hamburger-icon {
-    display: inline-block;
-    font-size: 1.4rem;
-    line-height: 1;
-    color: var(--brand-text, #0f1720);
-    /* 桌機為深色，避免在淺底看不見 */
-    user-select: none;
-    padding: 0.1rem 0.3rem;
-    border-radius: 6px;
-}
-
-/* 手機專用：在小螢幕時強制為白色圖示（覆寫桌機深色） */
-@media (max-width: 800px) {
-    .nav-toggle .hamburger-icon {
-        color: #ffffff !important;
-        /* 手機版白色 */
-        padding: 0.25rem 0.5rem;
-    }
-}
-
-/* 隱藏舊的 bar 結構（若先前版本仍存在） */
-.nav-toggle .hamburger,
-.nav-toggle .hamburger .bar {
-    display: none;
-}
-
-/* 使用字型圖示（Unicode）作為漢堡按鈕 */
-.nav-toggle .hamburger-icon {
-    display: inline-block;
-    font-size: 1.4rem;
-    line-height: 1;
-    color: #ffffff !important;
-    /* 強制白色 */
-    user-select: none;
-}
-
-/* 在手機顯示切換按鈕並確保顏色為白（以高優先度避免被其他規則覆蓋） */
-@media (max-width: 800px) {
     .nav-toggle {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
+        display: flex;
+        position: absolute;
+        top: 50%;
+        right: 1rem;
+        transform: translateY(-50%);
+        background-color: rgba(255, 255, 255, 0.1);
+        border-radius: 8px;
+        padding: 0.5rem;
+        transition: background-color 0.3s ease;
     }
 
-    .nav-toggle .hamburger-icon {
-        color: #ffffff !important;
-        /* 增加點擊區域 */
-        padding: 0.25rem 0.5rem;
-        border-radius: 6px;
+    .nav-toggle:hover {
+        background-color: rgba(255, 255, 255, 0.2);
     }
 
-    /* 開啟狀態確保仍為白色（如果 JS 加上 .open） */
-    .nav-toggle.open .hamburger-icon {
-        color: #ffffff !important;
+    .hamburger-icon {
+        width: 32px;
+        height: 32px;
     }
-}
 
-/* ...existing code... */
-.navbar .nav-list {
-    display: none !important;
-    width: 100%;
-    position: relative;
-    z-index: 50;
-}
+    .nav-list {
+        display: none !important;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background-color: #0B346E;
+        flex-direction: column;
+        padding: 0.5rem 0;
+        gap: 0;
+        margin-top: 0.5rem;
+        border-radius: 0 0 8px 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        z-index: 50;
+    }
 
-/* 開啟時為垂直排列並佔滿寬度 */
-.navbar .nav-list.open {
-    display: flex !important;
-    flex-direction: column;
-    gap: 0.25rem;
-    padding: 0.5rem 1rem;
-    /* 若想要與導覽列同背景，可取消下行註解 */
-    /* background-color: var(--navbar-bg); */
-    box-shadow: 0 6px 18px rgba(15, 23, 36, 0.06);
-}
+    .nav-list.open {
+        display: flex !important;
+    }
 
-/* 手機版每個項目填滿寬度，讓按鈕較容易點擊 */
-.navbar .nav-list .nav-item a {
-    display: block;
-    padding: 0.75rem 0.5rem;
-}
+    .nav-item {
+        width: 100%;
+    }
 
-/* 漢堡按鈕開啟時可做簡單動畫（切換成 X） */
-.nav-toggle.open .hamburger .bar:nth-child(1) {
-    transform: translateY(6px) rotate(45deg);
-}
-
-.nav-toggle.open .hamburger .bar:nth-child(2) {
-    opacity: 0;
-}
-
-.nav-toggle.open .hamburger .bar:nth-child(3) {
-    transform: translateY(-6px) rotate(-45deg);
+    .nav-item a {
+        padding: 0.75rem 1rem;
+    }
 }
