@@ -16,13 +16,15 @@ body {
 /* 導覽列樣式 */
 .navbar {
     background-color: #0B346E;
-    padding: 1rem;
+    padding: 1.5rem 2.0rem;
 }
 
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 15px;
+.navbar .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /* 品牌左、按鈕右 */
+    gap: 1rem;
 }
 
 .navbar-brand {
@@ -32,15 +34,45 @@ body {
     font-weight: bold;
 }
 
+.navbar .navbar-brand {
+    font-weight: 700;
+}
+
 .nav-list {
     list-style: none;
     display: flex;
     gap: 20px;
 }
 
+.navbar .nav-list {
+    display: flex;
+    gap: 0.75rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
 .nav-item a {
     color: white;
     text-decoration: none;
+}
+
+.navbar .nav-item a {
+    text-decoration: none;
+    padding: 0.5rem 0.75rem;
+    color: #ffffff;
+    /* 按鈕文字改為白色 */
+    border-radius: 4px;
+    transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+/* active / hover 狀態：使用較深但透明的背景以保留白色文字的可讀性 */
+.navbar .nav-item a.active,
+.navbar .nav-item a:hover {
+    background-color: rgba(0, 0, 0, 0.12);
+    /* 淡暗背景，讓白色文字可見 */
+    color: #ffffff;
+    /* 確保 hover/active 時仍為白色 */
 }
 
 .nav-item a:hover {
@@ -99,5 +131,18 @@ footer {
     .col-main,
     .col-sidebar {
         width: 100%;
+    }
+}
+
+/* 小螢幕處理：改為直列並讓按鈕靠右或換行 */
+@media (max-width: 600px) {
+    .navbar .container {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .navbar .nav-list {
+        justify-content: flex-end;
+        flex-wrap: wrap;
     }
 }
