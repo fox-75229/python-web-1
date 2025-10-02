@@ -1,4 +1,4 @@
-console.log("Hello! index.jsw")
+console.log("Hello! index.js")
 
 document.addEventListener('DOMContentLoaded', function () {
     const toggle = document.querySelector('.nav-toggle');
