@@ -42,7 +42,11 @@
     </header>
 
     <div class="content">
-        這裏放內容
+        <ul>
+            {% for user in user_list %}
+            <li>{{ user["name"] }}</li>
+            {% endfor %}
+        </ul>
     </div>
 
     <footer>
