@@ -1,0 +1,11 @@
+{
+    "permissions": {
+        "allow": [
+            "Bash(npx:*)",
+            "Bash(curl:*)",
+            "Bash(open:*)"
+        ],
+        "deny": [],
+        "ask": []
+    }
+}
