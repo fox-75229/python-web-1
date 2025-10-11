@@ -1,0 +1,137 @@
+{% extends "base.html" %}
+
+{% block title %}機器學習演算法總覽{% endblock %}
+
+{% block content %}
+<div class="content-section">
+    <h1>歡迎來到機器學習的世界</h1>
+    <hr>
+    <p class="intro-text">
+        在這裡，我們將一同探索那些驅動現代科技的強大演算法。機器學習不僅僅是程式碼，它更是一種讓電腦從數據中學習規律、做出智慧判斷的藝術。本課程將帶你深入了解幾種最核心、最實用的監督式學習模型。
+    </p>
+
+    <h2>機器學習演算法介紹</h2>
+    <p>下方是我們將會探索的主要模型，點擊按鈕可以深入了解每一個模型的細節。</p>
+
+    <div class="algorithm-card">
+        <h2>線性迴歸 (Linear Regression)</h2>
+        <div class="card-content">
+            <ul>
+                <li>
+                    <h3>演算法原理：</h3>
+                    <hr>
+                    <p>想像在滿是數據點的圖上，畫出一條最能「貼近」所有點的直線。這條直線就是模型的預測核心，它捕捉了變數之間最主要的線性趨勢。</p>
+                </li>
+                <li>
+                    <h3>適用場景：</h3>
+                    <hr>
+                    <p>當你需要預測一個「連續的數值」時，例如：預測房價、預測銷量、預測氣溫等。</p>
+                </li>
+
+                <li>
+                    <h3>優缺點分析：</h3>
+                    <hr>
+                    <div class="pros-cons-container">
+                        <span class="tag tag-pros"><strong>優點：</strong> 速度快、模型簡單、結果容易解釋。</span>
+                        <span class="tag tag-cons"><strong>缺點：</strong> 無法處理複雜的非線性關係，對異常值較敏感。</span>
+                    </div>
+                </li>
+
+                <li>
+                    <h3>實際應用案例：</h3>
+                    <hr>
+                    <p>Zillow 的房價預測系統 (Zestimate) 就是一個典型的應用，它根據房屋特徵來估算市場價值。</p>
+                </li>
+            </ul>
+            <div class="text-center"><a href="{{ url_for('regression') }}" class="btn-learn-more">深入了解線性迴歸</a></div>
+        </div>
+    </div>
+
+    <div class="algorithm-card">
+        <h2>K 近鄰演算法 (K-Nearest Neighbors, KNN)</h2>
+        <div class="card-content">
+            <ul>
+                <li>
+                    <h3>演算法原理：</h3>
+                    <hr>
+                    <p>採用「物以類聚」的哲學。當新資料出現時，去看離它最近的 K 個鄰居是誰，並採納多數鄰居的類別作為自己的類別，是一種非常民主的投票式演算法。</p>
+                </li>
+                <li>
+                    <h3>適用場景：</h3>
+                    <hr>
+                    <p>適用於分類問題，特別是當類別之間的界線不是那麼清晰明確時。例如：圖片內容識別、客戶分群。</p>
+                </li>
+
+                <li>
+                    <h3>優缺點分析：</h3>
+                    <hr>
+                    <div class="pros-cons-container">
+                        <span class="tag tag-pros"><strong>優點：</strong> 原理簡單、無需訓練模型。</span>
+                        <span class="tag tag-cons"><strong>缺點：</strong> 預測速度慢，對數據維度和 K 值的選擇非常敏感。</span>
+                    </div>
+                </li>
+
+                <li>
+                    <h3>實際應用案例：</h3>
+                    <hr>
+                    <p>Netflix 或 Spotify 的推薦系統，它們會推薦「與你品味相似的其他用戶也喜歡的」電影或音樂。</p>
+                </li>
+            </ul>
+            <div class="text-center"><a href="{{ url_for('knn') }}" class="btn-learn-more">深入了解 K 近鄰</a></div>
+        </div>
+    </div>
+
+    <div class="algorithm-card">
+        <h2>決策樹 (Decision Tree)</h2>
+        <div class="card-content">
+            <ul>
+                <li>
+                    <h3>演算法原理：</h3>
+                    <hr>
+                    <p>模仿人類的決策過程，建立一個樹狀的流程圖。從一個關鍵問題開始，根據答案走向不同的分支，層層遞進，直到得出最終結論。</p>
+                </li>
+                <li>
+                    <h3>適用場景：</h3>
+                    <hr>
+                    <p>需要高度解釋性的分類或迴歸任務。當你需要向非技術人員清楚解釋模型為何做出某個判斷時，決策樹是最佳選擇。</p>
+                </li>
+
+                <li>
+                    <h3>優缺點分析：</h3>
+                    <hr>
+                    <div class="pros-cons-container">
+                        <span class="tag tag-pros"><strong>優點：</strong> 結果直觀，易於視覺化和解釋（白箱模型）。</span>
+                        <span class="tag tag-cons"><strong>缺點：</strong> 單一決策樹容易過度學習數據細節（過擬合）。</span>
+                    </div>
+                </li>
+
+                <li>
+                    <h3>實際應用案例：</h3>
+                    <hr>
+                    <p>銀行用來審批貸款申請，模型會根據申請人的收入、信用歷史等特徵，走過一系列決策流程來判斷其違約風險。</p>
+                </li>
+            </ul>
+            <div class="text-center"><a href="{{ url_for('decision_tree') }}" class="btn-learn-more">深入了解決策樹</a></div>
+        </div>
+    </div>
+
+    <div class="feature-section">
+        <h2>為什麼選擇互動式學習？</h2>
+        <div class="feature-grid">
+            <div class="feature-item">
+                <h3>動手實作</h3>
+                <p>理論結合實踐，透過互動式程式碼編輯器，親手打造並驗證模型，學習效果事半功倍。</p>
+            </div>
+            <div class="feature-item">
+                <h3>視覺化學習</h3>
+                <p>將複雜的演算法與模型，轉化為直觀的圖表與動畫，一眼看懂數據背後的奧秘。</p>
+            </div>
+            <div class="feature-item">
+                <h3>即時反饋</h3>
+                <p>每次操作都能立即看到結果與修正建議，像擁有一位專屬家教，引導你走向正確的道路。</p>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}
