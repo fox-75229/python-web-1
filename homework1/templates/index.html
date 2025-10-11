@@ -17,27 +17,43 @@
         <h2>線性迴歸 (Linear Regression)</h2>
         <div class="card-content">
             <ul>
-                <li>
+                <li class="card-section-item">
                     <h3>演算法原理：</h3>
                     <hr>
                     <p>想像在滿是數據點的圖上，畫出一條最能「貼近」所有點的直線。這條直線就是模型的預測核心，它捕捉了變數之間最主要的線性趨勢。</p>
                 </li>
-                <li>
+                <li class="card-section-item">
                     <h3>適用場景：</h3>
                     <hr>
-                    <p>當你需要預測一個「連續的數值」時，例如：預測房價、預測銷量、預測氣溫等。</p>
+                    <ul class="scenario-list">
+                        <li><strong>市場趨勢預測：</strong> 根據歷史銷售數據、廣告投入等，預測未來產品的銷量。</li>
+                        <li><strong>金融風險評估：</strong> 分析客戶的信用分數、收入與負債，來預測貸款違約的機率。</li>
+                        <li><strong>房地產估價：</strong> 綜合坪數、地點、屋齡等特徵，建立模型來預估房屋的合理售價。</li>
+                    </ul>
                 </li>
-
-                <li>
+                <li class="card-section-item">
                     <h3>優缺點分析：</h3>
                     <hr>
                     <div class="pros-cons-container">
-                        <span class="tag tag-pros"><strong>優點：</strong> 速度快、模型簡單、結果容易解釋。</span>
-                        <span class="tag tag-cons"><strong>缺點：</strong> 無法處理複雜的非線性關係，對異常值較敏感。</span>
+                        <div class="pros-block">
+                            <h4>優點</h4>
+                            <ul>
+                                <li><strong>速度極快：</strong> 模型簡單，計算成本低，非常適合處理大規模數據。</li>
+                                <li><strong>容易解釋：</strong> 結果直觀，可以清楚知道每個特徵對結果的影響程度。</li>
+                                <li><strong>技術成熟：</strong> 是許多複雜演算法的基礎，理解它有助於學習更多模型。</li>
+                            </ul>
+                        </div>
+                        <div class="cons-block">
+                            <h4>缺點</h4>
+                            <ul>
+                                <li><strong>假設過於簡單：</strong> 只能捕捉線性關係，無法處理複雜、非線性的數據模式。</li>
+                                <li><strong>對異常值敏感：</strong> 一兩個極端的異常數據點就可能讓預測直線產生巨大偏移。</li>
+                                <li><strong>可能有多重共線性問題：</strong> 當特徵之間高度相關時，模型可能會不穩定。</li>
+                            </ul>
+                        </div>
                     </div>
                 </li>
-
-                <li>
+                <li class="card-section-item">
                     <h3>實際應用案例：</h3>
                     <hr>
                     <p>Zillow 的房價預測系統 (Zestimate) 就是一個典型的應用，它根據房屋特徵來估算市場價值。</p>
@@ -51,27 +67,43 @@
         <h2>K 近鄰演算法 (K-Nearest Neighbors, KNN)</h2>
         <div class="card-content">
             <ul>
-                <li>
+                <li class="card-section-item">
                     <h3>演算法原理：</h3>
                     <hr>
                     <p>採用「物以類聚」的哲學。當新資料出現時，去看離它最近的 K 個鄰居是誰，並採納多數鄰居的類別作為自己的類別，是一種非常民主的投票式演算法。</p>
                 </li>
-                <li>
+                <li class="card-section-item">
                     <h3>適用場景：</h3>
                     <hr>
-                    <p>適用於分類問題，特別是當類別之間的界線不是那麼清晰明確時。例如：圖片內容識別、客戶分群。</p>
+                    <ul class="scenario-list">
+                        <li><strong>客戶關係管理 (CRM)：</strong> 根據客戶的消費行為、年齡等特徵，將其分類為潛力客戶或流失風險客戶。</li>
+                        <li><strong>圖像內容識別：</strong> 根據像素特徵，判斷一張手寫數字的圖片是 0-9 中的哪一個。</li>
+                        <li><strong>生物資訊學：</strong> 依據基因表達模式，對不同病人的腫瘤樣本進行分類。</li>
+                    </ul>
                 </li>
-
-                <li>
+                <li class="card-section-item">
                     <h3>優缺點分析：</h3>
                     <hr>
                     <div class="pros-cons-container">
-                        <span class="tag tag-pros"><strong>優點：</strong> 原理簡單、無需訓練模型。</span>
-                        <span class="tag tag-cons"><strong>缺點：</strong> 預測速度慢，對數據維度和 K 值的選擇非常敏感。</span>
+                        <div class="pros-block">
+                            <h4>優點</h4>
+                            <ul>
+                                <li><strong>原理簡單：</strong> 演算法非常直觀，容易理解與實現，是入門的好選擇。</li>
+                                <li><strong>無需訓練：</strong> 屬於「懶人學習」，拿到新數據就能直接預測，對新資料適應快。</li>
+                                <li><strong>應用靈活：</strong> 只需改變距離計算方式，就能應用於各種不同類型的問題。</li>
+                            </ul>
+                        </div>
+                        <div class="cons-block">
+                            <h4>缺點</h4>
+                            <ul>
+                                <li><strong>預測緩慢：</strong> 每次預測都需要計算與所有數據點的距離，數據量大時非常耗時。</li>
+                                <li><strong>維度災難：</strong> 當特徵數量（維度）過多時，距離計算的意義會降低，模型效果會變差。</li>
+                                <li><strong>對 K 值敏感：</strong> K 值的選擇對結果影響巨大，需要反覆實驗才能找到最佳值。</li>
+                            </ul>
+                        </div>
                     </div>
                 </li>
-
-                <li>
+                <li class="card-section-item">
                     <h3>實際應用案例：</h3>
                     <hr>
                     <p>Netflix 或 Spotify 的推薦系統，它們會推薦「與你品味相似的其他用戶也喜歡的」電影或音樂。</p>
@@ -85,27 +117,43 @@
         <h2>決策樹 (Decision Tree)</h2>
         <div class="card-content">
             <ul>
-                <li>
+                <li class="card-section-item">
                     <h3>演算法原理：</h3>
                     <hr>
                     <p>模仿人類的決策過程，建立一個樹狀的流程圖。從一個關鍵問題開始，根據答案走向不同的分支，層層遞進，直到得出最終結論。</p>
                 </li>
-                <li>
+                <li class="card-section-item">
                     <h3>適用場景：</h3>
                     <hr>
-                    <p>需要高度解釋性的分類或迴歸任務。當你需要向非技術人員清楚解釋模型為何做出某個判斷時，決策樹是最佳選擇。</p>
+                    <ul class="scenario-list">
+                        <li><strong>醫療診斷輔助：</strong> 根據病患的症狀、年齡、檢驗數值等，建立一套決策流程來輔助判斷疾病類型。</li>
+                        <li><strong>金融貸款審批：</strong> 銀行依據客戶的收入、信用歷史、職業等，建立規則來決定是否核准貸款。</li>
+                        <li><strong>電商顧客行為分析：</strong> 分析顧客的瀏覽路徑、購買紀錄，找出影響最終是否下單的關鍵決策點。</li>
+                    </ul>
                 </li>
-
-                <li>
+                <li class="card-section-item">
                     <h3>優缺點分析：</h3>
                     <hr>
                     <div class="pros-cons-container">
-                        <span class="tag tag-pros"><strong>優點：</strong> 結果直觀，易於視覺化和解釋（白箱模型）。</span>
-                        <span class="tag tag-cons"><strong>缺點：</strong> 單一決策樹容易過度學習數據細節（過擬合）。</span>
+                        <div class="pros-block">
+                            <h4>優點</h4>
+                            <ul>
+                                <li><strong>高度可解釋：</strong> 決策過程可以被視覺化，是典型的「白箱模型」，易於理解。</li>
+                                <li><strong>數據要求低：</strong> 不需要對數據進行標準化或正規化等複雜的預處理。</li>
+                                <li><strong>功能強大：</strong> 能夠同時處理數值型和類別型的特徵。</li>
+                            </ul>
+                        </div>
+                        <div class="cons-block">
+                            <h4>缺點</h4>
+                            <ul>
+                                <li><strong>容易過擬合：</strong> 傾向於生成過於複雜的樹，完美擬合訓練數據但在新數據上表現差。</li>
+                                <li><strong>不穩定：</strong> 訓練數據的微小變化，可能導致生成完全不同的樹結構。</li>
+                                <li><strong>可能產生偏見：</strong> 對於樣本數較多的類別，決策樹可能會產生偏見。</li>
+                            </ul>
+                        </div>
                     </div>
                 </li>
-
-                <li>
+                <li class="card-section-item">
                     <h3>實際應用案例：</h3>
                     <hr>
                     <p>銀行用來審批貸款申請，模型會根據申請人的收入、信用歷史等特徵，走過一系列決策流程來判斷其違約風險。</p>
