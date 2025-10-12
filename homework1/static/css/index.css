@@ -95,6 +95,50 @@ footer {
     padding: 1rem;
 }
 
+/* ======================================================= */
+/* ✨ 在此新增「介紹橫幅」樣式 ✨          */
+/* ======================================================= */
+.intro-banner {
+    padding: 40px 130px;
+    /* 增加上下內邊距，讓文字有呼吸空間 */
+    border-radius: 8px;
+    /* 圓角，與卡片風格一致 */
+    margin-bottom: 2.5rem;
+    /* 與下方內容的間距 */
+    color: white;
+    /* 文字呈現白色 */
+    text-align: center;
+    /* 文字中心置中 */
+
+    /* 為不支援漸層的舊瀏覽器提供後備純色 */
+    background: rgb(30, 165, 255);
+    /* 您指定的漸層背景 */
+    background: linear-gradient(90deg, rgb(30, 165, 255) 2%, rgba(118, 69, 255, 1) 66%, rgba(132, 61, 255, 1) 100%);
+}
+
+.intro-banner h1 {
+    margin-bottom: 1rem;
+    font-size: 2.5rem;
+    font-weight: bold;
+}
+
+/* 覆寫 .intro-text 的預設樣式，使其適用於深色背景 */
+.intro-banner .intro-text {
+    font-size: 1.15em;
+    color: rgba(255, 255, 255, 0.9);
+    /* 使用半透明白色，視覺上更柔和 */
+    margin-bottom: 0;
+}
+
+
+.text-h2{
+        color: #0B346E;
+        text-align: center;
+        font-size: 2em;
+}
+/* ======================================================= */
+
+
 .intro-text {
     font-size: 1.1em;
     color: #555;
