@@ -1,0 +1,96 @@
+/* === 決策樹頁面 === */
+
+/* --- 1. 頁面整體 --- */
+.decision-tree-content {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+/* --- 2. 頂部介紹區塊樣式 --- */
+.intro-block {
+    background-color: #f8f9fa;
+    padding: 2rem;
+    border-radius: 8px;
+    border: 1px solid #e9ecef;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.intro-block h1 {
+    color: #0B346E;
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    letter-spacing: 1px;
+}
+
+.intro-block p {
+    font-size: 1.1rem;
+    color: #495057;
+    line-height: 1.7;
+}
+
+/* --- 優點 應用場景 --- */
+.pros-cons-container {
+    display: flex;
+    /* 保持水平排列 */
+    flex-wrap: wrap;
+    /* 換行 */
+    gap: 30px;
+}
+
+.pros-block,
+.cons-block {
+    border: 1px solid transparent;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+    transition: all 0.3s ease;
+    background-color: #fff;
+    overflow: hidden;
+    flex: 1;
+    min-width: 250px;
+}
+
+.pros-block h4,
+.cons-block h4 {
+    color: #fff;
+    padding: 12px 20px;
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.pros-block ul,
+.cons-block ul {
+    list-style: disc;
+    padding: 20px 20px 20px 40px;
+    margin: 0;
+}
+
+.pros-block li,
+.cons-block li {
+    font-size: 1rem;
+    color: #343a40;
+    padding-left: 0;
+    position: static;
+}
+
+.pros-block li+li,
+.cons-block li+li {
+    margin-top: 15px;
+}
+
+
+.pros-block h4 {
+    background-color: #28a745;
+}
+
+.cons-block h4 {
+    background-color: #17A2B8;
+}
+
+.pros-block:hover,
+.cons-block:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.1);
+}

@@ -15,13 +15,20 @@ def knn():
     return render_template("knn.html")
 
 
-# ===新增 /decision_tree 路由===
+# ===新增 /decision_tree===
 @app.route("/decision_tree")
 def decision_tree():
     """
-    這個函式會渲染 decision_tree.html 頁面。
+    這個函式會建立一個包含決策樹資訊的字典，
+    並將其傳遞到 decision_tree.html 模板中。
     """
-    return render_template("decision_tree.html")
+    # 建立變數 tree_info
+    tree_info = {
+        "algorithm": "決策樹分類器",
+        "applications": ["垃圾郵件分類", "客戶流失預測", "疾病診斷"],
+        "pros": ["容易理解", "不需要特徵縮放", "可視化清晰"]
+    }
+    return render_template("decision_tree.html", info=tree_info)
 # ==================================================
 
 @app.route("/lesson6_1")

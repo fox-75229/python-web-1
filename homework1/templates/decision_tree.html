@@ -1,32 +1,41 @@
 {% extends "base.html" %}
 
-{% block title %}決策樹分類 - Python機器學習課程{% endblock %}
+{% block head %}
+{{ super() }}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/decision_tree.css') }}">
+{% endblock %}
+
+
+{% block title %}決策樹分類器 - Python機器學習課程{% endblock %}
 
 {% block content %}
-<div class="content-section">
-    {# 1. 頁面標題 #}
-    <h1>決策樹分類</h1>
-    <hr>
+<div class="decision-tree-content">
 
-    {# 2. 說明段落 #}
-    <p>
-        決策樹 (Decision Tree)
-        是一種直觀的監督式學習模型，透過樹狀結構來進行決策。模型從代表資料集的根節點開始，依據不同特徵的數值進行分割，形成一個個決策節點，最終到達代表分類結果的葉節點。整個過程就像是在玩一個「是/否」的問答遊戲，最終得出結論。
-    </p>
+    <div class="intro-block">
+        <h1>{{ info.algorithm }}</h1>
+        <p>
+            決策樹 (Decision Tree) 是一種極度直觀的監督式學習模型，它模仿人類的決策過程，透過樹狀的流程圖來進行分類或預測。整個模型就像一個大型的「是/否」問答遊戲，最終引導你到一個明確的結論。
+        </p>
+    </div>
 
-    {# 額外內容，讓頁面更豐富 #}
-    <h3>模型優點</h3>
-    <ul>
-        <li><strong>易於理解與解釋：</strong> 決策過程可以被視覺化，非常直觀。</li>
-        <li><strong>需較少的資料預處理：</strong> 不需要對資料進行標準化或正規化。</li>
-        <li><strong>可處理數值與類別資料：</strong> 能夠同時應對不同類型的資料特徵。</li>
-    </ul>
+    <div class="pros-cons-container">
+        <div class="pros-block">
+            <h4>核心優點</h4>
+            <ul>
+                {% for pro in info.pros %}
+                <li>{{ pro }}</li>
+                {% endfor %}
+            </ul>
+        </div>
 
-    <div class="text-center mt-4">
-        {# 假設你有一個決策樹的圖片放在 static/images/ 中 #}
-        <img src="{{ url_for('static', filename='images/decision_tree_example.png') }}" alt="決策樹示意圖"
-            style="max-width: 500px; width: 100%; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
-        <p class="text-muted mt-2">一個簡單的決策樹模型示意圖</p>
+        <div class="cons-block">
+            <h4>主要應用場景</h4>
+            <ul>
+                {% for app in info.applications %}
+                <li>{{ app }}</li>
+                {% endfor %}
+            </ul>
+        </div>
     </div>
 </div>
 {% endblock %}

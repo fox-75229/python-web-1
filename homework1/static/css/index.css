@@ -68,10 +68,12 @@ body {
     background-color: rgba(255, 255, 255, 0.1);
 }
 
+/* 主要內容區 */
 main {
     padding: 2rem 0;
 }
 
+/* 頁尾 */
 footer {
     background-color: #0B346E;
     color: white;
@@ -80,11 +82,10 @@ footer {
     margin-top: 2rem;
 }
 
-/* 漢堡選單按鈕 */
+/* 漢堡選單按鈕 (響應式) */
 .nav-toggle {
     display: none;
 }
-
 
 /* ======================================================= */
 /* === 目錄頁 & 內容頁專用樣式 === */
@@ -128,7 +129,8 @@ footer {
     padding: 24px;
 }
 
-.card-content ul {
+/* 卡片內最外層的 ul */
+.card-content>ul {
     list-style: none;
     padding-left: 0;
 }
@@ -244,24 +246,16 @@ hr {
     border-color: rgba(220, 53, 69, 0.3);
 }
 
-/* ======================================================= */
-/* ✨ 在此修改「適用場景列表」樣式 (已移除圖示) ✨ */
-/* ======================================================= */
+/* 適用場景列表樣式 */
 .scenario-list {
     list-style: disc;
-    /* 恢復預設的圓點 */
     padding-left: 25px;
-    /* 讓列表有標準的內縮 */
     margin: 0;
 }
 
 .scenario-list li {
     margin-bottom: 10px;
-    /* 調整項目之間的間距 */
 }
-
-/* ======================================================= */
-
 
 /* 互動式學習特色區塊樣式 */
 .feature-section {
