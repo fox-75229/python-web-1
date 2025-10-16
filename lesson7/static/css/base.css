@@ -108,33 +108,7 @@ main {
     padding: 2rem 0;
 }
 
-.row {
-    display: flex;
-    flex-wrap: wrap;
-    margin: 0 -15px;
-}
 
-.col-main {
-    flex: 2;
-    padding: 0 15px;
-}
-
-.col-sidebar {
-    flex: 1;
-    padding: 0 15px;
-}
-
-.card {
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    padding: 1rem;
-    margin-bottom: 1rem;
-}
-
-.lead {
-    font-size: 1.2rem;
-    margin: 1rem 0;
-}
 
 /* 頁尾 */
 footer {

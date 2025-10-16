@@ -1,16 +1,27 @@
 {% extends "base.html" %}
 
+
+{% block head %}
+{{ super() }}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+{% endblock %}
+
+
+
+
 {% block content %}
-<div class="row">
-    <div class="col-main">
-        <h1>歡迎來到Python機器學習課程</h1>
-        <p class="lead">這裡是課程內容的主要區域</p>
+<main class="container">
+    <div class="hero-section">
+        <h1>歡迎來到機器學習世界</h1>
+        <p class="lead">探索 K 近鄰分類與線性迴歸的奧妙</p>
+        <p class="subtitle">透過互動式視覺化，深入理解機器學習演算法的運作原理</p>
     </div>
-    <div class="col-sidebar">
-        <div class="card">
-            <h5>課程資訊</h5>
-            <p>這裡可以放置重要的課程公告或連結</p>
-        </div>
-    </div>
-</div>
+</main>
+{% endblock %}
+
+
+
+
+{% block code %}
+<script src="{{ url_for('static', filename='js/index.js') }}"></script>
 {% endblock %}
