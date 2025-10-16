@@ -100,7 +100,7 @@
     padding-bottom: 0.5rem;
 }
 
-.algorithm-card .card-body h4:first-child{
+.algorithm-card .card-body h4:first-child {
     margin-top: 0;
 }
 
@@ -119,6 +119,115 @@
 .algorithm-card .card-body ul li {
     margin-bottom: 0.5rem;
 }
+
+/*pros and cons*/
+
+.pros-cons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin: 1rem 0;
+}
+
+.pros,
+.cons {
+    padding: 1rem;
+    border-radius: 8px;
+}
+
+.pros {
+    background-color: rgba(40, 167, 69, 0.1);
+    border-left: 4px solid rgba(40, 167, 69, 0.7);
+}
+
+.cons {
+    background-color: rgba(220, 53, 69, 0.08);
+    border-left: 4px solid rgba(220, 53, 69, 0.6);
+
+}
+
+.pros strong,
+.cons strong {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+}
+
+.pros ul,
+.cons ul {
+    padding-left: 1.5rem;
+    list-style: disc;
+}
+
+/*aciton button*/
+.action-button {
+    text-align: center;
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #ddd;
+}
+
+.btn-primary {
+    display: inline-block;
+    background: linear-gradient(90deg, rgba(131, 58, 180, 1) 0%, rgba(253, 29, 29, 1) 72%, rgba(252, 176, 69, 1) 100%);
+    color: #fff;
+    padding: 0.8rem 2rem;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.1rem;
+    transition: transform 0.3s ease, filter 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.15);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+/* info-section */
+.info-section {
+    background-color: #f4f4f4;
+    padding: 2rem;
+    border-radius: 10px;
+    margin-bottom: 2rem;
+}
+
+.info-section h2 {
+    font-size: 1.8rem;
+    color: #0B346E;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.features{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+}
+
+.feature-item {
+    text-align: center;
+    padding: 1.5rem;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.feature-item h4{
+    font-size: 1.2rem;
+    color: #0B346E;
+    margin-bottom: 0.8rem;
+}
+
+.feature-item p {
+    color: #666;
+    line-height: 1.6;
+}
+
+
+
 @media (max-width: 768px) {
     .hero-section h1 {
         font-size: 2rem;
@@ -137,4 +246,15 @@
         align-items: flex-start;
         gap: 0.5rem;
     }
+
+
+    .pros-cons {
+        grid-template-columns: 1fr;
+    }
+
+    .features{
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
 }

@@ -132,7 +132,7 @@ footer {
 }
 
 /* 響應式設計 - 手機 */
-@media (max-width: 800px) {
+@media (max-width: 768px) {
     .navbar {
         padding: 0.5rem 1rem;
     }
