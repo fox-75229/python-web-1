@@ -1,0 +1,59 @@
+/* homework2.html 專屬樣式 */
+
+.homework2-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 180px);
+    padding: 2rem 0;
+}
+
+/* 問答 */
+.qa-container {
+    background-color: white;
+    padding: 2.5rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 500px;
+    text-align: center;
+}
+
+.qa-container h2 {
+    margin-bottom: 1.5rem;
+    color: #333;
+    line-height: 1.4;
+}
+
+/* 按鈕樣式 (保持不變) */
+.toggle-button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    border: none;
+    background-color: #0B346E;
+    color: white;
+    border-radius: 5px;
+    margin-top: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+.toggle-button:hover {
+    background-color: #082a5c;
+}
+
+/* 修改答案文字樣式 */
+.answer-text {
+    margin-top: 1rem;
+    color: #004085;
+    font-weight: normal;
+
+    display: none;
+}
+
+/* 當答案文字擁有 'visible' class 時，顯示出來 */
+.answer-text.visible {
+    display: block;
+}
+
+/* ============================================== */

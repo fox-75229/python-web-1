@@ -45,8 +45,10 @@ body {
     font-weight: bold;
 }
 
+/* 導覽列選單 (桌面版) */
 .nav-list {
     display: flex;
+    /* 預設為 flex (桌面版水平排列) */
     list-style: none;
     margin: 0;
     padding: 0;
@@ -68,6 +70,42 @@ body {
     background-color: rgba(255, 255, 255, 0.1);
 }
 
+/* 漢堡選單按鈕*/
+.nav-toggle {
+    display: none;
+    /* 預設隱藏 */
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    z-index: 1001;
+}
+
+.hamburger-icon {
+    width: 24px;
+    height: 24px;
+}
+
+.hamburger-icon .line {
+    fill: #ffffff;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+/* 漢堡選單按鈕動畫 */
+.nav-toggle[aria-expanded="true"] .line.top {
+    transform: translateY(20px) rotate(45deg);
+}
+
+.nav-toggle[aria-expanded="true"] .line.middle {
+    opacity: 0;
+}
+
+.nav-toggle[aria-expanded="true"] .line.bottom {
+    transform: translateY(-20px) rotate(-45deg);
+}
+
 /* 主要內容區 */
 main {
     padding: 2rem 0;
@@ -82,38 +120,20 @@ footer {
     margin-top: 2rem;
 }
 
-/* 漢堡選單按鈕 (響應式) */
-.nav-toggle {
-    display: none;
-}
 
-/* ======================================================= */
-/* === 目錄頁 & 內容頁專用樣式 === */
-/* ======================================================= */
-
+/* === 目錄 === */
 .content-section {
     padding: 1rem;
 }
 
-
-/* ✨ 在此新增「介紹橫幅」樣式 ✨          */
-
 .intro-banner {
-    padding: 40px 130px;
-    /* 增加上下內邊距，讓文字有呼吸空間 */
+    padding: 40px 20px;
     border-radius: 8px;
-    /* 圓角，與卡片風格一致 */
     margin-bottom: 2.5rem;
-    /* 與下方內容的間距 */
     color: white;
-    /* 文字呈現白色 */
     text-align: center;
-    /* 文字中心置中 */
-
-    /* 為不支援漸層的舊瀏覽器提供後備純色 */
-    background: rgb(30, 165, 255);
-    /* 您指定的漸層背景 */
-    background: linear-gradient(90deg, rgb(30, 165, 255) 2%, rgba(118, 69, 255, 1) 66%, rgba(132, 61, 255, 1) 100%);
+    background: #2fcff7;
+    background: linear-gradient(90deg, rgba(47, 207, 247, 1) 2%, rgba(118, 69, 255, 1) 66%, rgba(132, 61, 255, 1) 100%);
 }
 
 .intro-banner h1 {
@@ -122,30 +142,24 @@ footer {
     font-weight: bold;
 }
 
-/* 覆寫 .intro-text 的預設樣式，使其適用於深色背景 */
 .intro-banner .intro-text {
     font-size: 1.15em;
     color: rgba(255, 255, 255, 0.9);
-    /* 使用半透明白色，視覺上更柔和 */
     margin-bottom: 0;
 }
 
-
-.text-h2{
-        color: #0B346E;
-        text-align: center;
-        font-size: 2em;
+.content-section>h2 {
+    color: #0B346E;
+    text-align: center;
+    font-size: 2em;
+    margin-top: 2rem;
 }
-/* ======================================================= */
 
-
-.intro-text {
-    font-size: 1.1em;
+.content-section>p {
+    text-align: center;
     color: #555;
-    margin-bottom: 2rem;
 }
 
-/* 演算法介紹卡片 */
 .algorithm-card {
     background-color: #f9f9f9;
     border-radius: 8px;
@@ -162,7 +176,7 @@ footer {
 }
 
 .algorithm-card h2 {
-    background-color: rgb(150, 66, 207);
+    background-color: #9642cf;
     color: white;
     padding: 15px 24px;
     margin: 0;
@@ -173,13 +187,11 @@ footer {
     padding: 24px;
 }
 
-/* 卡片內最外層的 ul */
 .card-content>ul {
     list-style: none;
     padding-left: 0;
 }
 
-/* 主章節列表項目的間距 */
 .card-section-item {
     margin-bottom: 1.5rem;
 }
@@ -196,7 +208,6 @@ footer {
     color: #555;
 }
 
-/* 學習更多按鈕 */
 .btn-learn-more {
     display: inline-block;
     color: white;
@@ -215,7 +226,6 @@ footer {
     transform: translateY(-2px);
 }
 
-/* 分隔線 */
 hr {
     border: none;
     height: 1px;
@@ -233,7 +243,6 @@ hr {
     text-align: center;
 }
 
-/* 優缺點區塊樣式 */
 .pros-cons-container {
     display: flex;
     flex-wrap: wrap;
@@ -290,7 +299,6 @@ hr {
     border-color: rgba(220, 53, 69, 0.3);
 }
 
-/* 適用場景列表樣式 */
 .scenario-list {
     list-style: disc;
     padding-left: 25px;
@@ -301,7 +309,6 @@ hr {
     margin-bottom: 10px;
 }
 
-/* 互動式學習特色區塊樣式 */
 .feature-section {
     background-color: #f4f4f4;
     text-align: center;
@@ -334,7 +341,132 @@ hr {
     margin-bottom: 0.5rem;
 }
 
-/* 響應式設計 */
+
+/* ===響應式設計=== */
 @media (max-width: 800px) {
-    /* ... (漢堡選單的響應式樣式) ... */
+
+    /* --- 顯示漢堡按鈕 --- */
+    .nav-toggle {
+        display: flex;
+        /* 在小螢幕上顯示 */
+        position: absolute;
+        /* 相對於 .navbar .container 定位 */
+        top: 50%;
+        right: 1rem;
+        transform: translateY(-50%);
+        background-color: rgba(255, 255, 255, 0.1);
+        border-radius: 5px;
+        padding: 0.5rem;
+        transition: background-color 0.3s ease;
+    }
+
+    .nav-toggle:hover {
+        background-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .hamburger-icon {
+        width: 28px;
+        /* 稍微放大圖示 */
+        height: 28px;
+    }
+
+
+    /* --- 下拉選單容器 (.nav-list) --- */
+    .nav-list {
+        display: flex;
+        /* 保持 flex 佈局 */
+        flex-direction: column;
+        /* 強制垂直排列 */
+        position: absolute;
+        top: 100%;
+        /* 緊貼導覽列下方 */
+        left: 0;
+        right: 0;
+        background-color: #0B346E;
+        /* 與導覽列同色 */
+        padding: 0.5rem 0;
+        gap: 0;
+        /* 移除桌面版的間距 */
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        /* 增加陰影使其更突出 */
+        z-index: 1000;
+        /* 確保在內容之上 */
+
+        max-height: 0;
+        opacity: 0;
+        overflow: hidden;
+        /* 隱藏超出 max-height 的內容 */
+        visibility: hidden;
+        /* 輔助隱藏，避免影響佈局 */
+        transition: max-height 0.4s ease-out, opacity 0.3s ease-out, visibility 0.4s;
+    }
+
+    /* --- 當選單被觸發打開時 (.nav-list.open) --- */
+    .nav-list.open {
+        max-height: 500px;
+        opacity: 1;
+        visibility: visible;
+        /* 設為可見 */
+        transition: max-height 0.4s ease-in, opacity 0.3s ease-in, visibility 0s;
+        /* 動畫參數微調 */
+    }
+
+    /* --- 下拉選單項目 (.nav-item) --- */
+    .nav-item {
+        width: 100%;
+        /* 項目佔滿整行 */
+    }
+
+    .nav-item a {
+        padding: 0.8rem 1.5rem;
+        /* 增加垂直 padding，方便點擊 */
+        text-align: left;
+        /* 文字靠左對齊 */
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        width: 100%;
+        /* 確保連結佔滿整行 */
+        border-radius: 0;
+        /* 移除桌面版的圓角 */
+    }
+
+    .nav-item:last-child a {
+        border-bottom: none;
+    }
+
+    .nav-item a:hover,
+    .nav-item a.active {
+        background-color: rgba(255, 255, 255, 0.15);
+    }
+
+
+    /* --- 介紹橫幅 --- */
+    .intro-banner {
+        padding: 30px 15px;
+        /* 減少內邊距 */
+    }
+
+    .intro-banner h1 {
+        font-size: 2rem;
+        /* 縮小標題字體 */
+    }
+
+    .intro-banner .intro-text {
+        font-size: 1rem;
+    }
+
+    /* --- 卡片標題 --- */
+    .algorithm-card h2 {
+        font-size: 1.3rem;
+        padding: 12px 20px;
+    }
+
+    /* --- 優缺點 --- */
+    .pros-cons-container {
+        gap: 20px;
+    }
+
+    .feature-grid {
+        gap: 20px;
+    }
+
 }

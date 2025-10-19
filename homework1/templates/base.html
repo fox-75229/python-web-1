@@ -16,10 +16,12 @@
             <a class="navbar-brand" href="{{ url_for('index')}}">職能發展學院</a>
             <ul class="nav-list">
                 <li class="nav-item">
-                    <a href="{{ url_for('index')}}" {% if request.endpoint=='index' %} class="active" {% endif%}>機器學習</a>
+                    <a href="{{ url_for('index')}}" {% if request.endpoint=='index' %} class="active" {% endif
+                        %}>機器學習</a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ url_for('regression')}}" {% if request.endpoint=='regression' %} class="active" {% endif %}>線性迴歸</a>
+                    <a href="{{ url_for('regression')}}" {% if request.endpoint=='regression' %} class="active" {% endif
+                        %}>線性迴歸</a>
                 </li>
                 <li class="nav-item">
                     <a href="{{ url_for('knn')}}" {% if request.endpoint=='knn' %} class="active" {% endif %}>k-近鄰分類</a>
@@ -27,6 +29,10 @@
                 <li class="nav-item">
                     <a href="{{ url_for('decision_tree')}}" {% if request.endpoint=='decision_tree' %} class="active" {%
                         endif %}>決策樹分類</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ url_for('homework2')}}" {% if request.endpoint=='homework2' %} class="active" {% endif
+                        %}>作業2</a>
                 </li>
             </ul>
             <button class="nav-toggle" aria-label="顯示導覽選單">
@@ -49,7 +55,9 @@
         </div>
     </footer>
 
+    {% block js %}
     <script src="{{ url_for('static', filename='js/index.js') }}"></script>
+    {% endblock %}
 </body>
 
 </html>
