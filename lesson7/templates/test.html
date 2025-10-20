@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>範例1</title>
+</head>
+
+<body>
+    <h1 id="title">這是標題</h1>
+    <button id="myButton">點我改變標題</button>
+
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            document.querySelector('#title')
+            const titleElement = document.querySelector('#title')
+            const buttonElement = document.querySelector('#myButton')
+
+            buttonElement.addEventListener('click',function(){
+                titleElement.textContent = "這是改變後的標題"
+            })
+        })
+
+    </script>
+</body>
+
+</html> 

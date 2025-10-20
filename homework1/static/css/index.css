@@ -343,7 +343,7 @@ hr {
 
 
 /* ===響應式設計=== */
-@media (max-width: 800px) {
+@media (max-width: 768px) {
 
     /* --- 顯示漢堡按鈕 --- */
     .nav-toggle {
