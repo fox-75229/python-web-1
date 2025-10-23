@@ -5,6 +5,13 @@
     "version": "0.1.0",
     "configurations": [
         {
+            "name": "Launch Chrome",
+            "request": "launch",
+            "type": "chrome",
+            "url": "http://127.0.0.1:5000/test",
+            "webRoot": "${workspaceFolder}"
+        },
+        {
             "name": "Python 偵錯工具: 目前檔案",
             "type": "debugpy",
             "request": "launch",

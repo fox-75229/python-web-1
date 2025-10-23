@@ -7,14 +7,16 @@
 
 <body>
     <div>
-        <canvas id="myChart"></canvas>
+        <canvas id="myChart" width="800" height="500"></canvas>
     </div>
 
     <script src="{{ url_for('static', filename='vendor/chart.js/chart.umd.js') }}"></script>
 
     <script>
+        debugger;
         const ctx = document.getElementById('myChart');
-
+        console.log("hello Javascript");
+        debugger;
         new Chart(ctx, {
             type: 'bar',
             data: {
@@ -26,6 +28,8 @@
                 }]
             },
             options: {
+                responsive: false,
+                maintainAspectRatio: false,
                 scales: {
                     y: {
                         beginAtZero: true
