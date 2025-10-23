@@ -6,16 +6,33 @@
 </head>
 
 <body>
-    <h1 id="title">這是標題</h1>
-    <button id="myButton">點我改變標題</button>
-    <script>
-        console.error("window是全域物件");
-        const titleElement = document.querySelector('#title');
-        const buttonElement = document.querySelector('#myButton');
+    <div>
+        <canvas id="myChart"></canvas>
+    </div>
 
-        buttonElement.addEventListener('click', function () {
-            titleElement.textContent = "標題被我改變了";
-        })        
+    <script src="{{ url_for('static', filename='vendor/chart.js/chart.umd.js') }}"></script>
+
+    <script>
+        const ctx = document.getElementById('myChart');
+
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+                datasets: [{
+                    label: '# of Votes',
+                    data: [12, 19, 3, 5, 2, 3],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
     </script>
 </body>
 
