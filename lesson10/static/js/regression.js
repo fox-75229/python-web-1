@@ -100,6 +100,17 @@ function renderChart(data) {
         options: {
             responsive: true,
             maintainAspectRatio: false,
+            plugins: {
+                title: {
+                    display: true,
+                    text: '平均方間數 vs 房價',
+                    font: {
+                        size: 18,
+                        weight: 'bold'
+                    },
+                    padding: 20
+                }
+            },
             scales: {
                 x: {
                     title: {
