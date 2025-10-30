@@ -7,15 +7,18 @@ import numpy as np
 from knn.knn import knn_bp
 
 app = Flask(__name__)
-
+# /knn 相關的路由註冊進來
+app.register_blueprint(knn_bp)
 
 # 自定義JSON序列化設定
 app.json.ensure_ascii = False
 
 
+
 @app.route("/")
 def index():
     return render_template("index.html")
+
 
 @app.route("/regression")
 def regression():
