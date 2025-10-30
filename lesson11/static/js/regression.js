@@ -10,43 +10,41 @@ document.addEventListener('DOMContentLoaded', function () {
         const rooms = parseFloat(document.getElementById('rooms-input').value)
         predictPrice(rooms)
     })
+
     //綁定Enter鍵觸發預測
     document.getElementById('rooms-input').addEventListener('keypress', function (e) {
-        if (e.key === 'Enter') {
+        if (e.key === "Enter") {
             const rooms = parseFloat(this.value)
             predictPrice(rooms)
         }
     })
-
 });
 
 async function loadRegressionData() {
     showLoading(true);
     try {
-        const response = await fetch('/api/regression/data')
+        const response = await fetch('/regression/api/data')
         if (!response.ok) {
             throw new Error(`網路出現問題:${response.statusText}`)
         }
         const data = await response.json()
 
         if (!data.success) {
-            throw new Error(`解析json失敗`);
+            throw new Error(`解析josn失敗`);
         }
         modelData = data
 
         // 繪制圖表
         renderChart(data)
 
-        //更新評估指標
+        // 更新評估指標
         updateMetrics(data.metrics)
 
-        //更新模型資訊
+        // 更新模型資訊
         updateModelInfo(data.description)
 
-
-
     } catch (error) {
-        showError(error.message)
+        showError(error.message);
     } finally {
         showLoading(false);
     }
@@ -123,29 +121,27 @@ function renderChart(data) {
             responsive: true,
             maintainAspectRatio: false,
             onClick: function (evt, activeElements) {
-                // console.table("evt:", evt);
-                // console.table("activeElements:", activeElements)
-                if (activeElements.length > 0) { 
-                    const element = activeElements[0];
-                    const datasetIndex = element.datasetIndex;
-                    const index = element.index;
-                    const dataset = chart.data.datasets[datasetIndex];
-                    
+                if (activeElements.length > 0) {
+                    const element = activeElements[0]
+                    const datasetIndex = element.datasetIndex
+                    const index = element.index
+                    const dataset = chart.data.datasets[datasetIndex]
 
-                    if (datasetIndex === 0 || datasetIndex === 1) { //訓練或測試的資料
+                    if (datasetIndex === 0 || datasetIndex === 1) { //訓練或測試資料
                         const point = dataset.data[index]
-                        const rooms = point.x;
-                        
+                        const rooms = point.x
+
                         //更新輸入框
                         document.getElementById('rooms-input').value = rooms.toFixed(1)
                         predictPrice(rooms)
+
                     }
                 }
             },
             plugins: {
                 title: {
                     display: true,
-                    text: '平均方間數 vs 房價',
+                    text: '平均房間數 vs 房價',
                     font: {
                         size: 18,
                         weight: 'bold'
@@ -155,7 +151,6 @@ function renderChart(data) {
                 tooltip: {
                     callbacks: {
                         label: function (context) {
-                            // console.table(context)
                             const datasetLabel = context.dataset.label || '';
                             const xValue = context.parsed.x.toFixed(2);
                             const yValue = context.parsed.y.toFixed(2);
@@ -212,7 +207,7 @@ async function predictPrice(rooms) {
         return;
     }
     try {
-        const response = await fetch(`/api/regression/predict?rooms=${rooms}`)
+        const response = await fetch(`/regression/api/predict?rooms=${rooms}`)
         const data = await response.json()
         if (data.success) {
             //更新預測結果
@@ -223,23 +218,20 @@ async function predictPrice(rooms) {
                 addPredictionPoint(rooms, data.prediction.price)
             }
         } else {
-            showError(data.error)
+            showError(data.error);
         }
-    }catch (error) {
-        showError('預測失敗:' + error.message);
+    } catch (error) {
+        showError('預測失敗:' + error.message)
     }
+
 }
 
 function addPredictionPoint(x, y) {
-    console.table(chart.data.datasets)
-    //移除之前的預測點
-    const existingDataset = chart.data.datasets.filter(ds => ds.label !== '你的預測')
-    existingDataset.push({
-        label: '你的預測',
-        data: [{
-            x: x,
-            y: y
-        }],
+    // 移除之前的預測點
+    const existingDatasets = chart.data.datasets.filter(ds => ds.label !== '您的預測')
+    existingDatasets.push({
+        label: '您的預測',
+        data: [{ x: x, y: y }],
         backgroundColor: '#ffc107',
         borderColor: '#ff9800',
         pointRadius: 12,
@@ -247,29 +239,31 @@ function addPredictionPoint(x, y) {
         pointStyle: 'star',
         borderWidth: 3
     })
-    chart.data.datasets = existingDataset
-    chart.update()
+
+    chart.data.datasets = existingDatasets;
+    chart.update();
 }
 
 function updateMetrics(metrics) {
-    document.getElementById('r2-score').textContent = metrics.r2_score
-    document.getElementById('mse').textContent = metrics.mse
-    document.getElementById('rmse').textContent = metrics.rmse
-    document.getElementById('coefficient').textContent = metrics.coefficient
+    document.getElementById('r2-score').textContent = metrics.r2_score;
+    document.getElementById('mse').textContent = metrics.mse;
+    document.getElementById('rmse').textContent = metrics.rmse;
+    document.getElementById('coefficient').textContent = metrics.coefficient;
 
     //R² 分數顏色提示
     const r2Element = document.getElementById('r2-score')
-    const r2Value = metrics.r2_score
-    if (r2Value >= 0.7) {
-        r2Element.style.color = 'green'
-    } else if (r2Value >= 0.4) {
-        r2Element.style.color = 'orange'
+    const r2Value = metrics.r2_score;
+    if (r2Value > 0.7) {
+        r2Element.style.color = '#4caf50';
+    } else if (r2Value > 0.4) {
+        r2Element.style.color = '#ff9800';
     } else {
-        r2Element.style.color = 'red'
+        r2Element.style.color = '#f44336';
     }
 }
 
 function updateModelInfo(description) {
+    console.table(description)
     document.getElementById('dataset-name').textContent = description.dataset
     document.getElementById('total-samples').textContent = description.samples
     document.getElementById('train-size').textContent = description.train_size

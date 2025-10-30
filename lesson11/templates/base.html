@@ -22,10 +22,10 @@
                     <a href="{{ url_for('index')}}" {% if request.endpoint=='index' %} class="active" {% endif%}>機器學習</a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ url_for('regression')}}" {% if request.endpoint=='regression' %} class="active" {% endif %}>線性迴歸</a>
+                    <a href="{{ url_for('regression.regression_index')}}" {% if request.endpoint=='regression_index' %} class="active" {% endif %}>線性迴歸</a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ url_for('knn.knn_index')}}" {% if request.endpoint=='knn' %} class="active" {% endif %}>k-近鄰分類</a>
+                    <a href="{{ url_for('knn.knn_index')}}" {% if request.endpoint=='knn_index' %} class="active" {% endif %}>k-近鄰分類</a>
                 </li>
             </ul>
             <!-- 手機版導覽切換按鈕 -->
