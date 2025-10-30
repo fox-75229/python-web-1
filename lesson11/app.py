@@ -124,24 +124,49 @@ def regression_data():
 @app.route("/api/regression/predict")
 def regression_predict():
     """線性迴歸預測 API - 根據房間數預測房價"""
-    print(request.args.get("room",5))
+    try:
+        # 取得使用者輸入的房間數
+        rooms = float(request.args.get('rooms', 5))
 
-    # 載入資料並訓練模型
-    housing = fetch_california_housing()
-    sample_size = 200
-    feature_idx = 2
-    X = housing.data[:sample_size,feature_idx].reshape(-1,1).shape  #特徵
-    y = housing.target[sample_size] * 10 #房價(萬美金) #標籤
-    
+         # 載入資料並訓練模型
+        housing = fetch_california_housing()
+        sample_size = 200
+        feature_idx = 2
+        X = housing.data[:sample_size,feature_idx].reshape(-1,1) #特徵
+        y = housing.target[:sample_size] * 10 # 房價(萬美金) #標籤
 
-    response = {
-        "success": True,
-        "Prediction":{
-            "price": 100,
-            "unit": "萬美元"
+        # 訓練模型
+        model = LinearRegression()
+        model.fit(X, y)
+
+        # 預測
+        X_input = np.array([[rooms]])
+        predicted_price = model.predict(X_input)[0]
+        print(predicted_price)
+
+        response = {
+            "success": True,
+            "input": {
+                "rooms": rooms,
+                "unit" : "間"
+            },
+            "prediction": {
+                "price": round(predicted_price, 2),
+                "unit": "萬美元"
+            },
+            "formula":{
+                "coefficient": round(model.coef_[0],2),
+                "intercept": round(model.intercept_, 2),
+                "equation": f"房價={round(model.coef_[0],2)} x 房間數 + {round(model.intercept_, 2)}"
+            }
         }
-    }
-    return jsonify(response)
+        return jsonify(response)
+    except Exception as error:
+        return jsonify(
+            {
+                "success": False,
+                "error": str(error)
+            }), 500
 
 def main():
     """啟動應用（教學用：啟用 debug 模式）"""

@@ -4,6 +4,20 @@ let modelData = null; //儲存模型資料
 // 頁面戴入完成後才執行
 document.addEventListener('DOMContentLoaded', function () {
     loadRegressionData();
+
+    //綁定預測按鈕事件
+    document.getElementById('predict-btn').addEventListener('click', function () {
+        const rooms = parseFloat(document.getElementById('rooms-input').value)
+        predictPrice(rooms)
+    })
+    //綁定Enter鍵觸發預測
+    document.getElementById('rooms-input').addEventListener('keypress', function (e) {
+        if (e.key === 'Enter') {
+            const rooms = parseFloat(this.value)
+            predictPrice(rooms)
+        }
+    })
+
 });
 
 async function loadRegressionData() {
@@ -23,9 +37,16 @@ async function loadRegressionData() {
         // 繪制圖表
         renderChart(data)
 
+        //更新評估指標
+        updateMetrics(data.metrics)
+
+        //更新模型資訊
+        updateModelInfo(data.description)
+
+
 
     } catch (error) {
-        showError(error.message);
+        showError(error.message)
     } finally {
         showLoading(false);
     }
@@ -102,8 +123,8 @@ function renderChart(data) {
             responsive: true,
             maintainAspectRatio: false,
             onClick: function (evt, activeElements) {
-                console.table("evt:", evt);
-                console.table("activeElements:", activeElements)
+                // console.table("evt:", evt);
+                // console.table("activeElements:", activeElements)
                 if (activeElements.length > 0) { 
                     const element = activeElements[0];
                     const datasetIndex = element.datasetIndex;
@@ -190,10 +211,70 @@ async function predictPrice(rooms) {
         alert('請輸入有效的房間數(1~15間)')
         return;
     }
-    
-    const response = await fetch(`/api/regression/predict?rooms=${rooms}`)
-    console.table(response)
+    try {
+        const response = await fetch(`/api/regression/predict?rooms=${rooms}`)
+        const data = await response.json()
+        if (data.success) {
+            //更新預測結果
+            document.getElementById('predicted-price').textContent = data.prediction.price;
 
+            //在圖表上顯示預測點
+            if (chart && modelData) {
+                addPredictionPoint(rooms, data.prediction.price)
+            }
+        } else {
+            showError(data.error)
+        }
+    }catch (error) {
+        showError('預測失敗:' + error.message);
+    }
+}
+
+function addPredictionPoint(x, y) {
+    console.table(chart.data.datasets)
+    //移除之前的預測點
+    const existingDataset = chart.data.datasets.filter(ds => ds.label !== '你的預測')
+    existingDataset.push({
+        label: '你的預測',
+        data: [{
+            x: x,
+            y: y
+        }],
+        backgroundColor: '#ffc107',
+        borderColor: '#ff9800',
+        pointRadius: 12,
+        pointHoverRadius: 15,
+        pointStyle: 'star',
+        borderWidth: 3
+    })
+    chart.data.datasets = existingDataset
+    chart.update()
+}
+
+function updateMetrics(metrics) {
+    document.getElementById('r2-score').textContent = metrics.r2_score
+    document.getElementById('mse').textContent = metrics.mse
+    document.getElementById('rmse').textContent = metrics.rmse
+    document.getElementById('coefficient').textContent = metrics.coefficient
+
+    //R² 分數顏色提示
+    const r2Element = document.getElementById('r2-score')
+    const r2Value = metrics.r2_score
+    if (r2Value >= 0.7) {
+        r2Element.style.color = 'green'
+    } else if (r2Value >= 0.4) {
+        r2Element.style.color = 'orange'
+    } else {
+        r2Element.style.color = 'red'
+    }
+}
+
+function updateModelInfo(description) {
+    document.getElementById('dataset-name').textContent = description.dataset
+    document.getElementById('total-samples').textContent = description.samples
+    document.getElementById('train-size').textContent = description.train_size
+    document.getElementById('test-size').textContent = description.test_size
+    document.getElementById('target-name').textContent = description.target_name
 }
 
 function showLoading(show) {
