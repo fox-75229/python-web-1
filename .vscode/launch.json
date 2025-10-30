@@ -8,7 +8,7 @@
             "name": "Launch Chrome",
             "request": "launch",
             "type": "chrome",
-            "url": "http://127.0.0.1:5000/regression",
+            "url": "http://127.0.0.1:5000/api/regression/predict?rooms=7.3",
             "webRoot": "${workspaceFolder}"
         },
         {
