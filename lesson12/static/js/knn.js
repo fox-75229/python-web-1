@@ -1,4 +1,5 @@
 let currentK = 5;
+let modelData = null;
 
 //載入頁面完成後執行
 document.addEventListener('DOMContentLoaded', function () {
@@ -14,12 +15,20 @@ async function loadKnnData() {
         const url = `/knn/api/data?k=${currentK}&feature_x=2&feature_y=3`
         const response = await fetch(url)
         const data = await response.json()
-        console.table(data)
+        if (data.success) {
+            modelData = data
+            console.table(modelData)
+        }else{
+            showError(data.error)
+        }
     } catch (error) {
-        console.log(error.message)
+        showError(error.message)
+    }finally{
+        showLoading(false)
     }
 }
 
+//顯示/隱藏載入狀態
 function showLoading(show) {
     const loading = document.getElementById('loading');
     if (show) {
@@ -28,4 +37,9 @@ function showLoading(show) {
         loading.classList.remove('active');
     }
 
+}
+//顯示錯誤訊息
+function showError(message) {
+    alert('錯誤:' + message);
+    console.error(message)
 }
