@@ -60,7 +60,7 @@ def knn_data():
 
         # 計算評估指標
         accuracy = accuracy_score(y_test, y_pred)
-        conf_matric = confusion_matrix(y_test, y_pred)
+        confusion_matrix_result = confusion_matrix(y_test, y_pred)
 
         # 準備回應資料
         response = {
@@ -89,7 +89,7 @@ def knn_data():
             },
             "metrics":{
                 "accuracy": round(accuracy,4),
-                "confusion_matric": conf_matric.tolist()
+                "confusion_matrix": confusion_matrix_result.tolist()
             },
             "description":{
                 "dataset": "鳶尾花資料集",
