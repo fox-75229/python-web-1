@@ -18,8 +18,8 @@ def knn_index():
 
 @knn_bp.route('/api/data')
 def knn_data():
+    """knn 分類 API - 使用鳶尾花資料集"""
     try:
-        """knn 分類 API - 使用鳶尾花資料集"""
         # 載入鳶尾花資料集
         iris = load_iris()    
         X = iris.data
@@ -60,7 +60,7 @@ def knn_data():
 
         # 計算評估指標
         accuracy = accuracy_score(y_test, y_pred)
-        confusion_matrix_result = confusion_matrix(y_test, y_pred)
+        conf_matric = confusion_matrix(y_test, y_pred)
 
         # 準備回應資料
         response = {
@@ -89,7 +89,7 @@ def knn_data():
             },
             "metrics":{
                 "accuracy": round(accuracy,4),
-                "confusion_matrix": confusion_matrix_result.tolist()
+                "confusion_matric": conf_matric.tolist()
             },
             "description":{
                 "dataset": "鳶尾花資料集",
@@ -107,4 +107,4 @@ def knn_data():
         return jsonify({
             "success": False,
             "error": str(error)
-        }),500
+        }), 500
