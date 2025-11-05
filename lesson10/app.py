@@ -20,17 +20,11 @@ def index():
 def knn():
     return render_template("knn.html")
 
-@app.route("/regression")
-def regression():
-    return render_template("regression.html")
+@app.route("/decision_tree")
+def decision_tree():
+    return render_template("decision_tree.html")
 
-@app.route("/test")
-def test():
-    return render_template("test.html")
 
-@app.route("/test1")
-def test1():
-    return render_template("test1.html")
 
 @app.route("/api/regression/data")
 def regression_data():
