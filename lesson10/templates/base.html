@@ -22,15 +22,22 @@
                     <a href="{{ url_for('index')}}" {% if request.endpoint=='index' %} class="active" {%
                         endif%}>專題簡介</a>
                 </li>
-
                 <!-- decision_tree -->
                 <li class="nav-item">
-                    <a href="{{ url_for('decision_tree')}}" {% if request.endpoint=='decision_tree' %} class="active" {% endif %}>決策樹</a>
+                    <a href="{{ url_for('decision_tree')}}" {% if request.endpoint=='decision_tree' %} class="active" {% endif
+                        %}>決策樹</a>
                 </li>
+
                 <li class="nav-item">
-                    <a href="{{ url_for('knn')}}" {% if request.endpoint=='knn' %} class="active" {% endif
+                    <a href="{{ url_for('logistic')}}" {% if request.endpoint=='logistic' %} class="active" {% endif
                         %}>邏輯迴歸</a>
                 </li>
+                
+                <li class="nav-item">
+                    <a href="{{ url_for('knn')}}" {% if request.endpoint=='knn' %} class="active" {% endif
+                        %}>knn</a>
+                </li>
+                
             </ul>
             <!-- 手機版導覽切換按鈕 -->
             <button class="nav-toggle" aria-label="顯示導覽選單">

@@ -24,6 +24,10 @@ def knn():
 def decision_tree():
     return render_template("decision_tree.html")
 
+@app.route("/logistic")
+def logistic():
+    return render_template("logistic.html")
+
 
 
 @app.route("/api/regression/data")
