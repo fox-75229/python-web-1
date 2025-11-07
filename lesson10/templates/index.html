@@ -124,56 +124,6 @@
                 </div>
             </div>
         </div>
-        <!-- KNN 分類卡片 -->
-        <div class="algorithm-card">
-            <div class="card-header">
-                <h3>K 近鄰演算法 (K-Nearest Neighbors, KNN)</h3>
-                <span class="badge">監督式學習</span>
-            </div>
-            <div class="card-body">
-                <h4>演算法原理</h4>
-                <p>KNN 是一種基於實例的學習方法，其核心思想是「物以類聚」。當需要預測一個新樣本時，算法會找出訓練資料中最接近的 K
-                    個鄰居，並根據這些鄰居的類別進行投票，選擇得票最多的類別作為預測結果。距離通常使用歐幾里得距離或曼哈頓距離計算。</p>
-
-                <h4>適用場景</h4>
-                <ul>
-                    <li>圖像識別：人臉辨識、手寫數字辨識</li>
-                    <li>推薦系統：根據相似用戶偏好推薦商品</li>
-                    <li>文本分類：垃圾郵件過濾、情感分析</li>
-                    <li>醫療診斷：根據症狀進行疾病分類</li>
-                </ul>
-
-                <h4>優缺點分析</h4>
-                <div class="pros-cons">
-                    <div class="pros">
-                        <strong>優點：</strong>
-                        <ul>
-                            <li>簡單直觀，易於理解和實作</li>
-                            <li>無需訓練過程，屬於懶惰學習</li>
-                            <li>能處理非線性決策邊界</li>
-                            <li>對異常值不敏感（取決於 K 值）</li>
-                        </ul>
-                    </div>
-                    <div class="cons">
-                        <strong>缺點：</strong>
-                        <ul>
-                            <li>預測階段計算成本高（需計算所有距離）</li>
-                            <li>記憶體需求大（需存儲所有訓練資料）</li>
-                            <li>對特徵尺度敏感，需進行標準化</li>
-                            <li>K 值選擇影響結果，需仔細調整</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <h4>實際應用案例</h4>
-                <p><strong>生物學領域：</strong>本展示使用經典的鳶尾花資料集，透過 4 個特徵（花萼長度、花萼寬度、花瓣長度、花瓣寬度）來分類 3
-                    種鳶尾花品種（Setosa、Versicolor、Virginica）。這個案例展示了如何利用形態特徵進行物種分類，在植物學研究和生態保育中具有重要應用價值。</p>
-
-                <div class="action-button">
-                    <a href="{# url_for('knn') #}" class="btn-primary">立即體驗 KNN 分類 →</a>
-                </div>
-            </div>
-        </div>
     </div>
     <div class="info-section">
         <h2>為什麼選擇互動式學習？</h2>
@@ -188,7 +138,7 @@
             </div>
             <div class="feature-item">
                 <h4>真實資料</h4>
-                <p>使用 scikit-learn 經典資料集，體驗真實世界的機器學習應用</p>
+                <p>使用 Kaggle 經典資料集，呈現真實的機器學習應用</p>
             </div>
         </div>
     </div>

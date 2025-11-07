@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <canvas id="myCanvas"></canvas>
+    <script>
+        //使用addEventListener監聽器，監聽mousemove滑鼠移動，並觸發後面的function
+        window.addEventListener('mousemove', (event) => {
+            /*在function內會傳入我們監聽的滑鼠物件，
+              我們可以從這個物件中取得我們要的資料：
+              x座標 event.pageX 及y座標 event.pageY
+              並把它印在console中*/
+            console.log(`${event.pageX},${event.pageY}`)
+        })
+        let canvas = document.getElementById("myCanvas");
+        let ctx = canvas.getContext("2d");
+        canvas.height = window.innerHeight;
+        canvas.width = window.innerWidth;
+
+        let mouse = {
+            x: 0,
+            y: 0,
+        }
+
+        window.addEventListener('mousemove', (event) => {
+            mouse.x = event.pageX;
+            mouse.y = event.pageY;
+        })
+
+        //一個繪製的function
+        const draw = () => {
+            //把視窗大小重新設定給canvas
+            canvas.height = window.innerHeight;
+            canvas.width = window.innerWidth;
+
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            //設定背景顏色
+            //先用180除上目前視窗的高度，再乘上目前滑鼠的y軸高度
+            let green = 180 - (mouse.y * (180 / window.innerHeight));
+
+            /*藍色部分沒有用255除上目前視窗高度是因為
+             如果使用255那藍色被扣掉的幅度會比綠色被扣掉的幅度還大，
+             所以這裡我選擇設定和綠色相同的比例，而最後y到視窗最下方時，
+             也會顯示很深很深的藍色，而不是黑色*/
+            let blue = 255 - (mouse.y * (180 / window.innerHeight));
+
+            ctx.fillStyle = `rgb(0, ${green}, ${blue})`;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            //之後繪製太陽
+            ctx.beginPath();
+            ctx.arc(mouse.x, mouse.y, 30, 0, Math.PI * 2);
+            ctx.strokeStyle = "#FF5511";
+            ctx.stroke();
+            ctx.fillStyle = "#FFFF00";
+            ctx.fill();
+
+            //繪製光芒線條
+            lightLine();
+        }
+
+        //繪製光芒線條的function
+        const lightLine = () => {
+            //設定線條顏色
+            ctx.strokeStyle = "#FF5511";
+
+            //分別是起始點和終點需要增加的距離
+            let moveLength = 40
+            let lineLength = 60
+
+            //第一次迴圈加上距離，第二次減掉距離
+            for (let i = -1; i <= 1; i += 2) {
+                //橫線
+                ctx.beginPath();
+                ctx.moveTo(mouse.x + (moveLength * i), mouse.y);
+                ctx.lineTo(mouse.x + (lineLength * i), mouse.y);
+                ctx.stroke();
+                //縱線
+                ctx.beginPath();
+                ctx.moveTo(mouse.x, mouse.y + (moveLength * i));
+                ctx.lineTo(mouse.x, mouse.y + (lineLength * i));
+                ctx.stroke();
+            }
+
+            //下右斜線
+            ctx.beginPath();
+            ctx.moveTo(mouse.x + 30, mouse.y + 30);
+            ctx.lineTo(mouse.x + (30 + 15), mouse.y + (30 + 15));
+            ctx.stroke();
+
+            //下左斜線
+            ctx.beginPath();
+            ctx.moveTo(mouse.x - 30, mouse.y + 30);
+            ctx.lineTo(mouse.x - (30 + 15), mouse.y + (30 + 15));
+            ctx.stroke();
+
+            //上右斜線
+            ctx.beginPath();
+            ctx.moveTo(mouse.x + 30, mouse.y - 30);
+            ctx.lineTo(mouse.x + (30 + 15), mouse.y - (30 + 15));
+            ctx.stroke();
+
+            //上左斜線
+            ctx.beginPath();
+            ctx.moveTo(mouse.x - 30, mouse.y - 30);
+            ctx.lineTo(mouse.x - (30 + 15), mouse.y - (30 + 15));
+            ctx.stroke();
+        }
+        function animate() {
+            draw();
+            requestAnimationFrame(animate);
+        }
+        animate();
+    </script>
+</body>
+
+</html>
