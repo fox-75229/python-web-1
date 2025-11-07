@@ -1,9 +1,13 @@
-from flask import Flask,render_template, jsonify, Response
+from flask import Flask,render_template, jsonify
 from sklearn.datasets import fetch_california_housing
 from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import r2_score, mean_squared_error
+from sklearn.preprocessing import StandardScaler
+from sklearn.metrics import r2_score, mean_squared_error,accuracy_score, confusion_matrix
 import numpy as np
+# 載入 Pandas 讀取csv
+import pandas as pd
+import os # 確保檔案路徑正確
 
 app = Flask(__name__)
 
@@ -28,11 +32,29 @@ def decision_tree():
 def logistic():
     return render_template("logistic.html")
 
+@app.route("/api/logistic/data")
+def logistic_data():
+    """邏輯迴歸 API - 使用心臟衰竭資料集"""
+    try:
+        # 載入心臟衰竭資料集heart.csv
+        csv_path = os.path.join(os.path.dirname(__file__), 'data', 'heart.csv')
+        df = pd.read_csv(csv_path)
 
+        # 檢查檔案是否正確載入
+        
+
+        
+    except Exception as e:
+        return jsonify(
+            {
+                "success": False,
+                "error": str(e)
+            }, 500
+        )
 
 @app.route("/api/regression/data")
 def regression_data():
-    """線性迴歸 API - 使用加州房價資料集（簡化版）"""
+    """線性迴歸 API - 使用加州房價資料集"""
     try:  
 
         # 載入加州房價資料集
