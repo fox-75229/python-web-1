@@ -1,16 +1,19 @@
 from flask import Flask,render_template, jsonify
-from sklearn.datasets import fetch_california_housing
-from sklearn.linear_model import LinearRegression
-from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import StandardScaler
-from sklearn.metrics import r2_score, mean_squared_error,accuracy_score, confusion_matrix
 import numpy as np
 # 載入 Pandas 讀取csv
 import pandas as pd
 import os # 確保檔案路徑正確
 
-app = Flask(__name__)
+from sklearn.datasets import fetch_california_housing
+# 載入邏輯迴歸模型
+from sklearn.linear_model import LogisticRegression
+from sklearn.linear_model import LinearRegression
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+from sklearn.metrics import r2_score, mean_squared_error,accuracy_score, precision_score, recall_score, f1_score, roc_auc_score
 
+
+app = Flask(__name__)
 
 # 自定義JSON序列化設定
 app.json.ensure_ascii = False
@@ -32,25 +35,110 @@ def decision_tree():
 def logistic():
     return render_template("logistic.html")
 
+#---API 路由---
+
 @app.route("/api/logistic/data")
 def logistic_data():
     """邏輯迴歸 API - 使用心臟衰竭資料集"""
     try:
         # 載入心臟衰竭資料集heart.csv
-        csv_path = os.path.join(os.path.dirname(__file__), 'data', 'heart.csv')
-        df = pd.read_csv(csv_path)
+        base_dir = os.path.dirname(os.path.abspath(__file__))
+        csv_path = os.path.join(base_dir, 'data', 'heart.csv')
 
         # 檢查檔案是否正確載入
+        if not os.path.exists(csv_path):
+            raise FileNotFoundError(f"找不到檔案:{csv_path}。請確認")
+        #讀取'csv_path'
+        data = pd.read_csv(csv_path)
         
+        # 取得特徵
+        feature_1 = 'ST_Slope'
+        feature_2 = 'ExerciseAngina'
+        target = 'HeartDisease'
 
+        if feature_1 not in data.columns or feature_2 not in data.columns or target not in data.columns:
+            raise KeyError(f"csv 檔案缺少'{feature_1}'、'{feature_2}'or'{target}'欄位'。")
         
-    except Exception as e:
-        return jsonify(
-            {
-                "success": False,
-                "error": str(e)
-            }, 500
+        x = data[[feature_1, feature_2]]
+        y = data[target]
+
+        #分割資料
+        X_train, X_test, y_train, y_test = train_test_split(
+            x, y, test_size=0.3, random_state=42, stratify=y
         )
+        # 訓練邏輯迴歸
+        model = LogisticRegression(random_state=42, solver='liblinear')
+        model.fit(X_train, y_train)
+
+        #產生決策邊界
+        x_min, x_max = X.iloc[:, 0].min() - 0.5, X.iloc[:, 0].max() + 0.5
+        y_min, y_max = X.iloc[:, 1].min() - 0.5, X.iloc[:, 1].max() + 0.5
+        #網格密度
+        step = 0.1
+        xx, yy = np.meshgrid(np.arange(x_min, x_max, step), np.arange(y_min, y_max, step))
+
+        #預測
+        meshgrid_data = np.c_[xx.ravel(), yy.ravel()]
+        meshgrid_data_df = pd.DataFrame(meshgrid_data, columns=[feature_1, feature_2])
+        Z = model.predict(meshgrid_data_df)
+        Z = Z.reshape(xx.shape)
+
+        # 計算評估指標
+        y_pred_test = model.predict(X_test)
+        # AUC 
+        y_pred_test = model.predict_proba(X_test)[:, 1]
+
+        metrics = {
+            "accuracy": round(accuracy_score(y_test, y_pred_test), 4),
+            "precision": round(precision_score(y_test, y_pred_test), 4),
+            "recall": round(recall_score(y_test, y_pred_test), 4),
+            "f1": round(f1_score(y_test, y_pred_test), 4),
+            "auc": round(roc_auc_score(y_test, y_pred_test), 4)
+        }
+        # 準備json回應資料
+        response = {
+            "success": True,
+            "data":{
+
+                #散點圖資料
+                "train_points":{
+                    "x1": X_train[feature_1].tolist(),
+                    "x2": X_train[feature_2].tolist(),
+                    "y": y_train.tolist()
+                },
+                "test_points":{
+                    "x1": X_test[feature_1].tolist(),
+                    "x2": X_test[feature_2].tolist(),
+                    "y": y_test.tolist()
+                },
+                #決策邊界資料
+                "decision_boundary":{
+                    "xx": xx.tolist(),
+                    "yy": yy.tolist(),
+                    "Z": Z.tolist()
+                }
+            },
+            "metrics": metrics,
+            "description":{
+                "dataset": "心臟衰竭資料集",
+                "x1_feature": feature_1,
+                "x2_feature": feature_2,
+                "y_target": target,
+                "info": "圖表顯示邏輯迴歸模型如何使用 2 個特徵來劃分決策邊界。"
+            }
+        }
+        return jsonify(response)
+
+    # 錯誤處理
+    except FileNotFoundError as e:
+        print(f"檔案錯誤: {e}")
+        return jsonify({"success": False, "error": str(e)}), 404
+    except KeyError as e:
+        print(f"欄位錯誤: {e}")
+        return jsonify({"success": False, "error": f"CSV 欄位錯誤: {e}"}), 400
+    except Exception as e:
+        print(f"伺服器錯誤: {e}") 
+        return jsonify({"success": False, "error": f"伺服器內部錯誤: {e}"}), 500
 
 @app.route("/api/regression/data")
 def regression_data():
