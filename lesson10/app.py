@@ -225,7 +225,7 @@ def regression_data():
         return jsonify(
             {
                 "success": False,
-                "error": str(e)
+                "error": str(e)  
             }, 500
         )
 
