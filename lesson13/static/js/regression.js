@@ -261,7 +261,7 @@ function updateMetrics(metrics) {
         r2Element.style.color = '#f44336';
     }
 }
-
+// 更新模型資訊
 function updateModelInfo(description) {
     console.table(description)
     document.getElementById('dataset-name').textContent = description.dataset
